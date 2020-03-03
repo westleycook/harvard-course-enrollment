@@ -33,7 +33,15 @@ enrollment_current %>%
   arrange(desc(total)) %>% 
   slice(1:5) %>% 
   select(course_title, course_name, course_department, instructor_full_name, total) %>% 
-  gt()
+  gt() %>% 
+  tab_header(title = "Five Biggest New Courses at Harvard, Spring 2020") %>% 
+  tab_footnote(footnote = "Data from Registrar Office",
+               locations = cells_title("title")) %>% 
+  cols_label(course_title = "Course Title",
+             course_name = "Course Name",
+             course_department = "Department",
+             instructor_full_name = "Instructor",
+             total = "Total Enrollment")
 
 ```
 
