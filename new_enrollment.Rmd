@@ -1,0 +1,39 @@
+---
+title: "Enrollment (maybe we'll finish this time)"
+author: "Westley and Alex"
+date: "3/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(janitor)
+library(readxl)
+library(gt)
+
+enrollment_current <- read_excel("raw-data/class_enrollment_summary_by_term_2.25.20_0.xlsx",
+                               skip = 3) %>% 
+  clean_names() %>% 
+  filter(!is.na(course_name))
+
+enrollment_spring_2019 <- read_excel("raw-data/class_enrollment_summary_by_term_3.22.19_0.xlsx",
+                               skip = 3) %>% 
+  clean_names() %>% 
+  filter(!is.na(course_name)) %>% 
+  select(course_id)
+
+```
+
+```{r enrollment, echo=FALSE}
+
+enrollment_current %>% 
+  anti_join(enrollment_spring_2019, by = "course_id") %>% 
+  arrange(desc(total)) %>% 
+  slice(1:5) %>% 
+  select(course_title, course_name, course_department, instructor_full_name, total) %>% 
+  gt()
+
+```
+
