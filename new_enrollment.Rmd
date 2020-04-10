@@ -1,5 +1,5 @@
 ---
-title: "Enrollment (maybe we'll finish this time)"
+title: "Harvard College Enrollment Trends"
 author: "Westley and Alex"
 date: "3/3/2020"
 output: html_document
